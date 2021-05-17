@@ -32,6 +32,6 @@ class Player
         const vector<short> & get_guess(void) const {return m_guess;} // get guess
         bool get_is_first_guess(void) const {return is_first_guess;} // get is_first_guess
         void set_is_first_guess(bool flag){is_first_guess = flag;} // set is_first_guess
-        friend bool operator==(const Player &, const Game_host &); // compare Player's guess to Game_host's target 
-        friend bool operator==(const Game_host &, const Player &); // compare Game_host's target to Player's guess
+        friend string operator==(const Player &, const Game_host &); // compare Player's guess to Game_host's target 
+        friend string operator==(const Game_host &, const Player &); // compare Game_host's target to Player's guess
 };

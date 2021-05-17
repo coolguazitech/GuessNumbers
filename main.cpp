@@ -15,22 +15,31 @@ short set_level(short);
 
 int main()
 {
-    short num;
-    cout << "please select how many number of digits you'd like to guess (3 or 4): ";
+    short num, level;
+
+    cout << "please select how many digits you'd like to guess (3 or 4): ";
     cin >> num;
 
-    short level = set_level(num);
+    level = set_level(num);
 
     Game_host * host = new Game_host(level);
     host->print_target(); // for debug
 
     Player * player = new Player();
 
-    bool is_succeed = false;
+    bool is_succeed;
+
     do
-    {
+    {   
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+
+        is_succeed = false;
+
         cout << "please take a guess: ";
+
         vector<short> guess (level);
+
         if(level == BEGINNER)
         {
             cin >> guess[0] >> guess[1] >> guess[2]; 
@@ -39,13 +48,19 @@ int main()
         {
             cin >> guess[0] >> guess[1] >> guess[2] >> guess[3]; 
         }
+
         is_succeed = player->set_guess(guess);
-        if(is_succeed == false)
+
+        if(!is_succeed)
         {
             cout << "input error!" << endl;
         }
-    } while (is_succeed == false);
-    
+        
+    } while (!is_succeed);
+
+    string result = *player == *host;
+
+    cout << result;
 
     delete host;
     delete player;
@@ -129,7 +144,7 @@ int main()
     //         guess_count--;
     //     }
     // }
-    getchar();
+    system("PAUSE");
     return 0;
 }
 
