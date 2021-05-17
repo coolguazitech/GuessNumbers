@@ -7,56 +7,48 @@
 
 #define BEGINNER 3
 #define VETERAN 4
+#define VERSION "0.0.1"
 
 using namespace std;
 
-vector<char> generate_target_digtis(void);
-
-
-int validate_digits(const vector<short>& digits)
-{
-    for(short digit : digits)
-    {  
-        if(digit > 9 && digit < 0)
-        {
-            return 0;
-        }
-    }
-
-    for(vector<short>::const_iterator iter1 = digits.begin(); iter1 != digits.end() - 1; ++iter1)
-    {
-        for(vector<short>::const_iterator iter2 = digits.begin() + 1; iter2 != digits.end(); ++iter2)
-        {
-                if(*iter1 == *iter2) return 0;
-        }
-    }
-
-    return 1;
-}
-
-// void print_answer (const short answer[])
-// {
-//     for(int i = 0 ; i < NUMBER ; i++)
-//     {
-//         cout << answer[i];
-//     }
-//     cout << endl;
-// }
-
-
+short set_level(short);
 
 int main()
 {
-    Game * game = new Game(BEGINNER);
+    short num;
+    cout << "please select how many number of digits you'd like to guess (3 or 4): ";
+    cin >> num;
 
-    game->print_answer();
+    short level = set_level(num);
 
-    delete game;
-    // srand(time(NULL));
-    // char answer[4];
-    // int r = rand() % 10;
-    // answer[0] = r;
-    // int index = 1;
+    Game_host * host = new Game_host(level);
+    host->print_target(); // for debug
+
+    Player * player = new Player();
+
+    bool is_succeed = false;
+    do
+    {
+        cout << "please take a guess: ";
+        vector<short> guess (level);
+        if(level == BEGINNER)
+        {
+            cin >> guess[0] >> guess[1] >> guess[2]; 
+        }
+        else if(level == VETERAN)
+        {
+            cin >> guess[0] >> guess[1] >> guess[2] >> guess[3]; 
+        }
+        is_succeed = player->set_guess(guess);
+        if(is_succeed == false)
+        {
+            cout << "input error!" << endl;
+        }
+    } while (is_succeed == false);
+    
+
+    delete host;
+    delete player;
 
     // while(index < 4)
     // {
@@ -141,5 +133,19 @@ int main()
     return 0;
 }
 
-
+short set_level(short num)
+{
+    switch(num)
+    {
+        case 3:
+            return BEGINNER;
+            break;
+        case 4:
+            return VETERAN;
+            break;
+        default:
+            cout << "Illegal input.";
+    }
+    return -1;
+}
 

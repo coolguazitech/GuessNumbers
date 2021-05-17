@@ -3,41 +3,75 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include <set>
 
-Game::Game()
+Game_host::Game_host()
 {
-    setLevel(3);
-    m_answer = _generate_target_digtis(m_level);
+    set_level(3);
+    m_target = generate_target_digtis(m_level);
 }
 
-Game::Game(short level) : m_level(level)
+Game_host::Game_host(short level) : m_level(level)
 {
-    m_answer = _generate_target_digtis(m_level);
+    m_target = generate_target_digtis(m_level);
 }
 
-vector<short> Game::_generate_target_digtis(short level)
+vector<short> Game_host::generate_target_digtis(short level)
 {
-    vector<short> allDigits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector<short> all_digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     vector<short> target;
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    shuffle(allDigits.begin(), allDigits.end(), default_random_engine(seed));
-    for(int i = 0; i < level; i++)
-    {
-        target.push_back(allDigits[i]);
-    }
+    shuffle(all_digits.begin(), all_digits.end(), default_random_engine(seed));
+    target.insert(target.end(), all_digits.begin(), all_digits.begin() + 4);
     return target;
 }
 
-void Game::print_answer(void)
+void Game_host::print_target(void)
 {
-    for(int i = 0; i < getLevel(); i++)
+    for(int i = 0; i < get_level(); i++)
     {
-        cout << m_answer[i];
+        cout << m_target[i];
     }
     cout << endl;
 }
 
-void Game::remake_target(void)
+void Game_host::remake_target(void)
 {
-    m_answer = _generate_target_digtis(m_level);    
+    m_target = generate_target_digtis(m_level);    
 }
+
+
+bool Player::validate_digits(const vector<short> & digits)
+{
+    set<short> cmp_digits (digits.begin(), digits.end());
+    return cmp_digits.size() == digits.size();
+}
+
+bool Player::set_guess(const vector<short> & guess)
+{
+    if(validate_digits(guess))
+    {
+        m_guess = guess;
+        set_is_first_guess(true);
+        return true;
+    }
+    return false;
+}
+
+// bool operator==(const Game_host & host, const Player & player)
+// {
+//     if(player.get_is_first_guess())
+//     {
+//         return host.get_target() == player.get_guess();
+//     }
+//     return false;
+// }
+
+// bool operator==(const Player & player, const Game_host & host)
+// {
+//     if(player.get_is_first_guess())
+//     {
+//         return player.get_guess() == host.get_target();
+//     } 
+//     return false;
+// }
