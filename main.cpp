@@ -7,7 +7,7 @@
 
 #define BEGINNER 3
 #define VETERAN 4
-#define VERSION "0.0.1"
+#define VERSION "0.0.2"
 
 using namespace std;
 
