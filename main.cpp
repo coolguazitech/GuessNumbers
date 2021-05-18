@@ -5,141 +5,114 @@
 #include <algorithm>
 #include "GuessNumber.cpp"
 
+#define VERSION "0.0.2"
+
 #define BEGINNER 3
 #define VETERAN 4
+#define CHANCES 10
+
 
 using namespace std;
 
-vector<char> generate_target_digtis(void);
-
-
-int validate_digits(const vector<short>& digits)
-{
-    for(short digit : digits)
-    {  
-        if(digit > 9 && digit < 0)
-        {
-            return 0;
-        }
-    }
-
-    for(vector<short>::const_iterator iter1 = digits.begin(); iter1 != digits.end() - 1; ++iter1)
-    {
-        for(vector<short>::const_iterator iter2 = digits.begin() + 1; iter2 != digits.end(); ++iter2)
-        {
-                if(*iter1 == *iter2) return 0;
-        }
-    }
-
-    return 1;
-}
-
-// void print_answer (const short answer[])
-// {
-//     for(int i = 0 ; i < NUMBER ; i++)
-//     {
-//         cout << answer[i];
-//     }
-//     cout << endl;
-// }
-
-
+short set_level(short);
 
 int main()
 {
-    Game * game = new Game(BEGINNER);
+    short num, level;
+    short chances = CHANCES;
 
-    game->print_answer();
+    cout << "please select how many digits you'd like to guess (3 or 4): ";
+    cin >> num;
 
-    delete game;
-    // srand(time(NULL));
-    // char answer[4];
-    // int r = rand() % 10;
-    // answer[0] = r;
-    // int index = 1;
+    level = set_level(num);
 
-    // while(index < 4)
-    // {
-    //     int r = rand() % 10;
-    //     int count = 0;
-    //     for(int j = 0 ; j < index ; j++)
-    //     {
-    //         if(answer[j] == r)
-    //         {
-    //             break;
-    //         }
-    //         else
-    //         {
-    //             count++;
-    //         }
-    //     }
-    //     if(count == index)
-    //     {
-    //         answer[index] = r;
-    //         index++;
-    //     }
-    // }
+    Game_host * host = new Game_host(level);
+    // host->print_target(); // for debug
 
-    // // print_answer(answer);
+    Player * player = new Player();
 
-    // int guess_count = 0;
+    bool is_succeed;
+    string result;
 
-    // while(true)
-    // {
-    //     if(guess_count >= 10)
-    //     {
-    //         cout << "You have no chances so lose the game!";
-    //         break;
-    //     }
+    while (chances > 0 && ((level == 4 && result != "4 A 0 B") || (level == 3 && result != "3 A 0 B")))
+    {
+        do
+        {   
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
 
-    //     cout << "Please guess 4 distinct digits: " << "(" << 10 - guess_count << " chances)" << endl;
+            is_succeed = false;
 
-    //     vector<short> guess(4);
+            cout << "please take a guess (" << chances << " chances left): ";
 
-    //     // cout >> guess[0] >> guess[1] >> guess[2] >> guess[3];
+            vector<short> guess (level);
 
-    //     guess_count++;
+            if(level == BEGINNER)
+            {
+                cin >> guess[0] >> guess[1] >> guess[2]; 
+            }
+            else if(level == VETERAN)
+            {
+                cin >> guess[0] >> guess[1] >> guess[2] >> guess[3]; 
+            }
 
-    //     int A = 0, B = 0;
+            is_succeed = player->set_guess(guess);
+
+            if(!is_succeed)
+            {
+                cout << "input error!" << endl;
+            }
         
-    //     if(validate_digits(guess))
-    //     {
-    //         for(int i = 0 ; i < NUMBER ; i++)
-    //         {
-    //             for(int j = 0 ; j < NUMBER ; j++)
-    //             {
-    //                 if(guess[i] == answer[j])
-    //                 {
-    //                     if(i == j)
-    //                     {
-    //                         A++;
-    //                     }
-    //                     else
-    //                     {
-    //                         B++;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         if(A < 4)
-    //         {
-    //             cout << A << 'A' << B << 'B' << endl;
-    //         }
-    //         else 
-    //         {
-    //             cout << "You win!";
-    //             break;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         cout << "input error" << endl;
-    //         guess_count--;
-    //     }
-    // }
-    getchar();
+        } while (!is_succeed);
+
+        result = *player == *host;
+        string show = "";
+        auto cur_guess = player->get_guess();
+
+        for(auto digit: cur_guess)
+        {
+            show = show + to_string(digit) + " ";
+        }
+        show = show + ">> " + result;
+        
+        cout << show << endl;
+
+        chances--;
+    }
+
+    cout << endl;
+
+    if((level == 4 && result == "4 A 0 B") || (level == 3 && result == "3 A 0 B"))
+    {
+        result = "You win!";
+    }
+    else
+    {
+        result = "You lose!";
+    }
+    
+    cout << result << endl << endl;
+
+    delete host;
+    delete player;
+
+    system("PAUSE");
     return 0;
 }
 
-
+short set_level(short num)
+{
+    switch(num)
+    {
+        case 3:
+            return BEGINNER;
+            break;
+        case 4:
+            return VETERAN;
+            break;
+        default:
+            cout << "Illegal input.";
+    }
+    return -1;
+}
 
