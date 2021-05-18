@@ -27,14 +27,14 @@ int main()
     level = set_level(num);
 
     Game_host * host = new Game_host(level);
-    host->print_target(); // for debug
+    // host->print_target(); // for debug
 
     Player * player = new Player();
 
     bool is_succeed;
     string result;
 
-    while (chances > 0 && result != "4A0B")
+    while (chances > 0 && ((level == 4 && result != "4 A 0 B") || (level == 3 && result != "3 A 0 B")))
     {
         do
         {   
@@ -65,21 +65,24 @@ int main()
         
         } while (!is_succeed);
 
-        string result = "";
+        result = *player == *host;
+        string show = "";
         auto cur_guess = player->get_guess();
 
         for(auto digit: cur_guess)
         {
-            result = result + to_string(digit) + " ";
+            show = show + to_string(digit) + " ";
         }
-        result = result + ">> " + (*player == *host);
+        show = show + ">> " + result;
         
-        cout << result << endl;
+        cout << show << endl;
 
         chances--;
     }
 
-    if(result == "4A0B")
+    cout << endl;
+
+    if((level == 4 && result == "4 A 0 B") || (level == 3 && result == "3 A 0 B"))
     {
         result = "You win!";
     }
@@ -88,7 +91,7 @@ int main()
         result = "You lose!";
     }
     
-    cout << result;
+    cout << result << endl << endl;
 
     delete host;
     delete player;
