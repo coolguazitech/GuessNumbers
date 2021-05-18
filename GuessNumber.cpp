@@ -26,11 +26,12 @@ vector<short> Game_host::generate_target_digtis(short level)
 
 void Game_host::print_target(void)
 {
+    cout << "The answer is ";
     for(int i = 0; i < get_level(); i++)
     {
         cout << m_target[i];
     }
-    cout << endl;
+    cout << " with debugging." << endl;
 }
 
 void Game_host::remake_target(void)
@@ -80,7 +81,7 @@ string operator==(const Game_host & host, const Player & player)
             }
         }
     }
-    string result = to_string(A) + " A " + to_string(B) + " B ";
+    string result = to_string(A) + " A " + to_string(B) + " B";
     return result;
 
 }
@@ -110,6 +111,6 @@ string operator==(const Player & player, const Game_host & host)
             }
         }
     }
-    string result = to_string(A) + " A " + to_string(B) + " B ";
+    string result = to_string(A) + " A " + to_string(B) + " B";
     return result;
 }
