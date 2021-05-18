@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
-#include <chrono>
 #include <set>
 
 Game_host::Game_host()
@@ -20,9 +19,8 @@ vector<short> Game_host::generate_target_digtis(short level)
 {
     vector<short> all_digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     vector<short> target;
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    shuffle(all_digits.begin(), all_digits.end(), default_random_engine(seed));
-    target.insert(target.end(), all_digits.begin(), all_digits.begin() + 4);
+    shuffle(all_digits.begin(), all_digits.end(), default_random_engine(time(0)));
+    target.assign(all_digits.begin(), all_digits.begin() + level);
     return target;
 }
 
@@ -58,20 +56,60 @@ bool Player::set_guess(const vector<short> & guess)
     return false;
 }
 
-// bool operator==(const Game_host & host, const Player & player)
-// {
-//     if(player.get_is_first_guess())
-//     {
-//         return host.get_target() == player.get_guess();
-//     }
-//     return false;
-// }
+string operator==(const Game_host & host, const Player & player)
+{
+    auto target = host.get_target();
+    auto guess = player.get_guess();
+    int A = 0, B = 0, size = target.size();
+    for(int i = 0; i < size; i++)
+    {
+        for(int j = 0; j < size; j++)
+        {
+            if(guess[i] == target[j])
+            {
+                if(i == j)
+                {
+                    A++;
+                    break;
+                }
+                else
+                {
+                    B++;
+                    break;
+                }
+            }
+        }
+    }
+    string result = to_string(A) + " A " + to_string(B) + " B ";
+    return result;
 
-// bool operator==(const Player & player, const Game_host & host)
-// {
-//     if(player.get_is_first_guess())
-//     {
-//         return player.get_guess() == host.get_target();
-//     } 
-//     return false;
-// }
+}
+
+string operator==(const Player & player, const Game_host & host)
+{
+    auto target = host.get_target();
+    auto guess = player.get_guess();
+    int A = 0, B = 0, size = target.size();
+    
+    for(int i = 0; i < size; i++)
+    {
+        for(int j = 0; j < size; j++)
+        {
+            if(guess[i] == target[j])
+            {
+                if(i == j)
+                {
+                    A++;
+                    break;
+                }
+                else
+                {
+                    B++;
+                    break;
+                }
+            }
+        }
+    }
+    string result = to_string(A) + " A " + to_string(B) + " B ";
+    return result;
+}
