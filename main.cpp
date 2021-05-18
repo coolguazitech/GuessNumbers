@@ -5,9 +5,12 @@
 #include <algorithm>
 #include "GuessNumber.cpp"
 
+#define VERSION "0.0.2"
+
 #define BEGINNER 3
 #define VETERAN 4
-#define VERSION "0.0.2"
+#define CHANCES 10
+
 
 using namespace std;
 
@@ -16,6 +19,7 @@ short set_level(short);
 int main()
 {
     short num, level;
+    short chances = CHANCES;
 
     cout << "please select how many digits you'd like to guess (3 or 4): ";
     cin >> num;
@@ -28,122 +32,67 @@ int main()
     Player * player = new Player();
 
     bool is_succeed;
+    string result;
 
-    do
-    {   
-        cin.clear();
-        cin.ignore(INT_MAX, '\n');
+    while (chances > 0 && result != "4A0B")
+    {
+        do
+        {   
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
 
-        is_succeed = false;
+            is_succeed = false;
 
-        cout << "please take a guess: ";
+            cout << "please take a guess (" << chances << " chances left): ";
 
-        vector<short> guess (level);
+            vector<short> guess (level);
 
-        if(level == BEGINNER)
-        {
-            cin >> guess[0] >> guess[1] >> guess[2]; 
-        }
-        else if(level == VETERAN)
-        {
-            cin >> guess[0] >> guess[1] >> guess[2] >> guess[3]; 
-        }
+            if(level == BEGINNER)
+            {
+                cin >> guess[0] >> guess[1] >> guess[2]; 
+            }
+            else if(level == VETERAN)
+            {
+                cin >> guess[0] >> guess[1] >> guess[2] >> guess[3]; 
+            }
 
-        is_succeed = player->set_guess(guess);
+            is_succeed = player->set_guess(guess);
 
-        if(!is_succeed)
-        {
-            cout << "input error!" << endl;
-        }
+            if(!is_succeed)
+            {
+                cout << "input error!" << endl;
+            }
         
-    } while (!is_succeed);
+        } while (!is_succeed);
 
-    string result = *player == *host;
+        string result = "";
+        auto cur_guess = player->get_guess();
 
+        for(auto digit: cur_guess)
+        {
+            result = result + to_string(digit) + " ";
+        }
+        result = result + ">> " + (*player == *host);
+        
+        cout << result << endl;
+
+        chances--;
+    }
+
+    if(result == "4A0B")
+    {
+        result = "You win!";
+    }
+    else
+    {
+        result = "You lose!";
+    }
+    
     cout << result;
 
     delete host;
     delete player;
 
-    // while(index < 4)
-    // {
-    //     int r = rand() % 10;
-    //     int count = 0;
-    //     for(int j = 0 ; j < index ; j++)
-    //     {
-    //         if(answer[j] == r)
-    //         {
-    //             break;
-    //         }
-    //         else
-    //         {
-    //             count++;
-    //         }
-    //     }
-    //     if(count == index)
-    //     {
-    //         answer[index] = r;
-    //         index++;
-    //     }
-    // }
-
-    // // print_answer(answer);
-
-    // int guess_count = 0;
-
-    // while(true)
-    // {
-    //     if(guess_count >= 10)
-    //     {
-    //         cout << "You have no chances so lose the game!";
-    //         break;
-    //     }
-
-    //     cout << "Please guess 4 distinct digits: " << "(" << 10 - guess_count << " chances)" << endl;
-
-    //     vector<short> guess(4);
-
-    //     // cout >> guess[0] >> guess[1] >> guess[2] >> guess[3];
-
-    //     guess_count++;
-
-    //     int A = 0, B = 0;
-        
-    //     if(validate_digits(guess))
-    //     {
-    //         for(int i = 0 ; i < NUMBER ; i++)
-    //         {
-    //             for(int j = 0 ; j < NUMBER ; j++)
-    //             {
-    //                 if(guess[i] == answer[j])
-    //                 {
-    //                     if(i == j)
-    //                     {
-    //                         A++;
-    //                     }
-    //                     else
-    //                     {
-    //                         B++;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         if(A < 4)
-    //         {
-    //             cout << A << 'A' << B << 'B' << endl;
-    //         }
-    //         else 
-    //         {
-    //             cout << "You win!";
-    //             break;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         cout << "input error" << endl;
-    //         guess_count--;
-    //     }
-    // }
     system("PAUSE");
     return 0;
 }
