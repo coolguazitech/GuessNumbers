@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "GuessNumber.cpp"
 
-#define VERSION "0.0.2"
+#define VERSION "0.0.3"
 
 #define BEGINNER 3
 #define VETERAN 4
