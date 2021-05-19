@@ -21,7 +21,7 @@ int main()
     short num, level;
     short chances = CHANCES;
 
-    cout << "please select how many digits you'd like to guess (3 or 4): ";
+    cout << "please select a number of digits you'd like to guess (3 or 4): ";
     cin >> num;
 
     level = set_level(num);
