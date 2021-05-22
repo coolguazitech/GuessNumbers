@@ -5,4 +5,6 @@ In a well-known game, Bulls & Cows, two players each hold a set of digits to the
 
 ## Introduction to Bulls & Cows
 
+In our study, the classic game Bulls & Cows is converted to a simple version which has a folk name in my living area, by its direct meaning, called GuessNumbers.  
+
 Those who have no idea how to choose a guessing strategy
