@@ -8,10 +8,13 @@ In a well-known game, Bulls & Cows, two players each hold a set of digits to the
 In our study, the classic game *Bulls & Cows* is converted to a simple version which has a folk name in my living area, by its direct meaning, called GuessNumbers. First and foremost, each players set 4 secret digits and bear them in mind, for each turn, one takes a guess in order to match the opponent's digits, and then the other does the same vise versa. Once a guess (said to be a query) is given, the opponent must give a corresponding response that has a pattern of xAyB (x and y are numbers between 0 and 4), which means that there are x digits appearing in the target pattern and being located in the right positions, and y digits appearing in the target pattern but in the wrong positions. The aim is to see who correctly guesses the opponent's digits first, or with the fewest number of chances. One can assume that the key to winning the game is to choose a better method of guessing, or arithmetic.
 
 ## Method
-Those who have no idea how to choose a guessing strategy...
+Since the states of the game are volatile, and that the methods of guessing each turn are not independent in probability, it's not practical to calculate all the correctly guessing probabilities on what situations happen to the circumstances when players guess their digits by the current clue the opponent gave and by the previous one and the previous previous one, etc. Alternatively, we give two arithmetics, one is the widely used method of guessing, called Method B, the other is the mainly proposed arithmetic in our paper, called Method A. Then we code a simulation program and gather the statistics to see how these two methods go through quantitatively large-scale trials, the most important indicator is the guessing times for matching the correct digits. Why we select Method B on our control group is because of that we believe that those who have no idea how to choose a guessing strategy will take our advice if we tell them the pros about this method, no doubt here it's a reasonable method for this game.
 
+## Algorithms
+#### *Method A*
+#### *Method B*
 ## Results
-### Our arithmetic
+#### *Method A*
 ```
 How many trials will be run in total (increment by 1000 recommended, max 65000): 10000
 
@@ -38,7 +41,7 @@ There are [    0 (  0 %) ] trials going through [ 15 ] guess(es).
 
 Furthermore, the mean equals to 5.5 (times).
 ```
-### Other's arithmetic
+#### *Method B*
 ```
 How many trials will be run in total (increment by 1000 recommended, max 65000): 10000
 
