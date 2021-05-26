@@ -10,7 +10,7 @@ In our study, the classic game *Bulls & Cows* is converted to a simple version w
 ## Method
 Those who have no idea how to choose a guessing strategy
 
-## Experiment
+## Results
 ### Our arithmetic
 ```
 How many trials will be run in total (increment by 1000 recommended, max 65000): 10000
