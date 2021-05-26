@@ -13,6 +13,7 @@ Since the states of the game are volatile, and that the methods of guessing each
 ## Algorithms
 #### *Method A*
 #### *Method B*
+It's all similar to _Method A_, only except for first two turns, first turn we pick "0 1 2 3", if the response is of the form "xAyB" and x + y = 4, then we choose one of all permutations among "0 1 2 3" for each in the subsequent guesses, otherwise, it's forced to choose "4 5 6 7" at the second guess.
 ## Results
 #### *Method A*
 ```
