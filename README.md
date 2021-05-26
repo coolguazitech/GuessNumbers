@@ -64,4 +64,3 @@ There are [    0 (  0 %) ] trials going through [ 14 ] guess(es).
 There are [    0 (  0 %) ] trials going through [ 15 ] guess(es).
 
 Furthermore, the mean equals to 5.6 (times).
-```
