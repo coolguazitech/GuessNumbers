@@ -31,8 +31,9 @@ int main()
 
     while (trials_count > 0)
     {
-        Game_host * host = new Game_host(level);
-        Solver * solver = new Solver(level);
+        Game_host * host = new Game_host();
+        Solver2 * solver = new Solver2();
+
         reach_target = false;
         count = 0;
         
@@ -40,14 +41,21 @@ int main()
         {
             count++;
             solver->take_guess();
+
             result = *solver == *host;
+
             if (result == "4 A 0 B")
             {
                 reach_target = true;
             }
+            else if (solver->is_four_matched(result))
+            {
+                solver->set_four_matched(true);
+                solver->update(result);
+            }
             else
             {
-                solver->update(result);
+                solver->update(result);     
             }
         }
         if (count <= 15)

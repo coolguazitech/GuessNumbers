@@ -53,3 +53,23 @@ class Solver
         friend string operator==(const Solver &, const Game_host &);
         friend string operator==(const Game_host &, const Solver &);
 };
+
+class Solver2
+{
+    private:
+        vector<short> m_guess;
+        vector<vector<short>> m_rest_of_choices;
+        const vector<vector<short>> get_all_permutations();
+        bool m_four_matched = false;
+
+    public:
+        Solver2();
+        void take_guess(void); // take a guess
+        const vector<short> & get_guess(void) const {return m_guess;} // get guess
+        void update(string);
+        bool is_four_matched(string);
+        void set_four_matched(bool four_matched) {m_four_matched = four_matched;}
+        int get_rest_choices_size(void) {return m_rest_of_choices.size();}
+        friend string operator==(const Solver2 &, const Game_host &);
+        friend string operator==(const Game_host &, const Solver2 &);
+};
