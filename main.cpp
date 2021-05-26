@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "GuessNumber.cpp"
 
-#define VERSION "0.0.2"
+#define VERSION "0.0.3"
 
 #define BEGINNER 3
 #define VETERAN 4
@@ -47,18 +47,18 @@ int main()
 
             vector<short> guess (level);
 
-            if(level == BEGINNER)
+            if (level == BEGINNER)
             {
                 cin >> guess[0] >> guess[1] >> guess[2]; 
             }
-            else if(level == VETERAN)
+            else if (level == VETERAN)
             {
                 cin >> guess[0] >> guess[1] >> guess[2] >> guess[3]; 
             }
 
             is_succeed = player->set_guess(guess);
 
-            if(!is_succeed)
+            if (!is_succeed)
             {
                 cout << "input error!" << endl;
             }
@@ -69,7 +69,7 @@ int main()
         string show = "";
         auto cur_guess = player->get_guess();
 
-        for(auto digit: cur_guess)
+        for (auto digit: cur_guess)
         {
             show = show + to_string(digit) + " ";
         }
@@ -82,7 +82,7 @@ int main()
 
     cout << endl;
 
-    if((level == 4 && result == "4 A 0 B") || (level == 3 && result == "3 A 0 B"))
+    if ((level == 4 && result == "4 A 0 B") || (level == 3 && result == "3 A 0 B"))
     {
         result = "You win!";
     }
@@ -102,7 +102,7 @@ int main()
 
 short set_level(short num)
 {
-    switch(num)
+    switch (num)
     {
         case 3:
             return BEGINNER;
