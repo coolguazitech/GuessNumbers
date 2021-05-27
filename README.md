@@ -33,7 +33,7 @@ On the very beginning turn, we pick "0 1 2 3", for each turn, according to the p
 It's all similar to _Method A_, only except for first two turns, first turn we pick "0 1 2 3", if the response is of the form "xAyB" and x + y = 4, then we choose one of all permutations among "0 1 2 3" for each in the subsequent guesses, otherwise, it's forced to choose "4 5 6 7" at the second guess.
 
 ## Results
-As we can obviously see, even though the mean of _Method A_ is leading by the narrowest of margins, the pivotal figures determining on who to win are between 5 guesses and 6 guesses, the following report shows that you have higher probability fully matching up the digits at your 5th guess using _Method A_, interestingly, it's worth mentioning that if you win in 4 guesses, you are more likely to choose _Method B_ for your guessing strategy, this may cause a misjudgment that you think _Method B_ would be better if you've never considered _Method A_.
+As we can obviously see, even though the mean of _Method A_ is leading by the narrowest of margins, the pivotal figures determining on who to win  frequently occur between 5 guesses and 6 guesses, the following report shows that you have higher probability fully matching up the digits at your 5th guess using _Method A_, interestingly, it's worth mentioning that if you win in 4 guesses, you are more likely to choose _Method B_ for your guessing strategy, this may cause a misjudgment that you think _Method B_ would be better if you've never considered _Method A_.
 #### *Method A*
 ```
 How many trials will be run in total (increment by 1000 recommended, max 65000): 10000
