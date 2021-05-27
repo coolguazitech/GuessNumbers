@@ -1,6 +1,22 @@
 # GuessNumbers
 
-If you want to play the game directly, check your C++ environment, compiler (MinGW, g++...), compile the file `main.cpp`, and then start the game! Please note that when you enter your guess, separate your input with spaces, e.g. "1 2 3 4" or it will crash.
+If you want to play the game directly, check your C++ environment, compiler (MinGW, g++...), compile the file `main.cpp`, and then start the game! Please note that when you enter your guess, separate your input with spaces, e.g. "1 2 3 4" or it will crash. The game will be like this:
+```
+please select a number of digits you'd like to guess (3 or 4): 4
+
+please take a guess (10 chances left): 0 1 2 3
+0 1 2 3 >> 0 A 1 B
+please take a guess (9 chances left): 1 4 5 6
+1 4 5 6 >> 0 A 1 B
+please take a guess (8 chances left): 5 7 3 9
+5 7 3 9 >> 0 A 2 B
+please take a guess (7 chances left): 7 3 4 8
+7 3 4 8 >> 0 A 1 B
+please take a guess (6 chances left): 9 5 8 2
+9 5 8 2 >> 4 A 0 B
+
+You win!
+```
 
 ## Abstract
 In a well-known game, Bulls & Cows, two players each hold a set of digits to their chests, after logically reasoning with from-turn-to-turn queries, their guesses match the confidential digits. The winner is presumably set to be the one who uses the fewest chances to guess. In this paper, we propose an arithmetic (way to guess) and prove how good it is, which is compared to the other one usually used by most of people, by both mathematical derivation and experimental statistics. We are also interested in the statistical distribution of numbers of guesses in winner's manner, in particular, the mean of them.
