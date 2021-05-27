@@ -1,22 +1,20 @@
 # GuessNumbers
 
-If you want to play the game directly, check your C++ environment, compiler (MinGW, g++...), compile the file `main.cpp`, and then start the game! Please note that when you enter your guess, separate your input with spaces, e.g. "1 2 3 4" or it will crash. The game will be like this:
-```
-please select a number of digits you'd like to guess (3 or 4): 4
+If you want to play the game directly, check your C++ environment, compiler (MinGW, g++...), compile the file `main.cpp`, and then start the game! Please note that when you enter your guess, separate your input with spaces, e.g. "1 2 3 4" or it will crash. The game will run like this:
 
-please take a guess (10 chances left): 0 1 2 3
-0 1 2 3 >> 0 A 1 B
-please take a guess (9 chances left): 1 4 5 6
-1 4 5 6 >> 0 A 1 B
-please take a guess (8 chances left): 5 7 3 9
-5 7 3 9 >> 0 A 2 B
-please take a guess (7 chances left): 7 3 4 8
-7 3 4 8 >> 0 A 1 B
-please take a guess (6 chances left): 9 5 8 2
-9 5 8 2 >> 4 A 0 B
-
+>please select a number of digits you'd like to guess (3 or 4): 4 <br><br>
+please take a guess (10 chances left): 0 1 2 3 <br>
+0 1 2 3 >> 0 A 1 B <br>
+please take a guess (9 chances left): 1 4 5 6 <br>
+1 4 5 6 >> 0 A 1 B <br>
+please take a guess (8 chances left): 5 7 3 9 <br>
+5 7 3 9 >> 0 A 2 B <br>
+please take a guess (7 chances left): 7 3 4 8 <br>
+7 3 4 8 >> 0 A 1 B <br>
+please take a guess (6 chances left): 9 5 8 2 <br>
+9 5 8 2 >> 4 A 0 B <br><br>
 You win!
-```
+
 
 ## Abstract
 In a well-known game, Bulls & Cows, two players each hold a set of digits to their chests, after logically reasoning with from-turn-to-turn queries, their guesses match the confidential digits. The winner is presumably set to be the one who uses the fewest chances to guess. In this paper, we propose an arithmetic (way to guess) and prove how good it is, which is compared to the other one usually used by most of people, by both mathematical derivation and experimental statistics. We are also interested in the statistical distribution of numbers of guesses in winner's manner, in particular, the mean of them.
@@ -35,7 +33,7 @@ On the first turn, we pick "0 1 2 3", for each turn, according to the previous r
 It's all similar to _Method A_, only except for first two turns, first turn we pick "0 1 2 3", if the response is of the form "xAyB" and x + y = 4, then we choose one of all permutations among "0 1 2 3" for each in the subsequent guesses, otherwise, it's forced to choose "4 5 6 7" at the second guess.
 
 ## Results
-As we can obviously see, even though the mean of _Method A_ is leading by the narrowest of margins, the pivotal figures determining on who to win are between 5 guesses and 6 guesses, the following report shows that you have higher probability fully matching up the digits at your 5th guess using _Method A_, interestingly, it's worth mentioning that if you win in 4 guesses, you are more likely to choose _Method B_ for your guessing strategy, this may be a misjudgment that you think _Method B_ would be better if you've never considered _Method A_.
+As we can obviously see, even though the mean of _Method A_ is leading by the narrowest of margins, the pivotal figures determining on who to win are between 5 guesses and 6 guesses, the following report shows that you have higher probability fully matching up the digits at your 5th guess using _Method A_, interestingly, it's worth mentioning that if you win in 4 guesses, you are more likely to choose _Method B_ for your guessing strategy, this may cause a misjudgment that you think _Method B_ would be better if you've never considered _Method A_.
 #### *Method A*
 ```
 How many trials will be run in total (increment by 1000 recommended, max 65000): 10000
@@ -63,6 +61,7 @@ There are [    0 (  0 %) ] trials going through [ 15 ] guess(es).
 
 Furthermore, the mean equals to 5.5 (times).
 ```
+
 #### *Method B*
 ```
 How many trials will be run in total (increment by 1000 recommended, max 65000): 10000
