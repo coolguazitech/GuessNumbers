@@ -32,7 +32,7 @@ On the very beginning turn, we pick "0 1 2 3", for each turn, according to the p
 #### *Method B*
 It's all similar to _Method A_, only except for first two turns, first turn we pick "0 1 2 3", if the response is of the form "xAyB" and x + y = 4, then we choose one of all permutations among "0 1 2 3" for each in the subsequent guesses, otherwise, it's forced to choose "4 5 6 7" at the second guess.
 
-## Results
+## Experiment
 As we can obviously see, even though the mean of _Method A_ is leading by the narrowest of margins, the pivotal figures determining on who to win  frequently occur between 5 guesses and 6 guesses, the following report shows that you have higher probability fully matching up the digits at your 5th guess using _Method A_, interestingly, it's worth mentioning that if you win in 4 guesses, you are more likely to choose _Method B_ for your guessing strategy, this may cause a misjudgment that you think _Method B_ would be better if you've never considered _Method A_.
 #### *Method A*
 ```
@@ -88,3 +88,6 @@ There are [    0 (  0 %) ] trials going through [ 14 ] guess(es).
 There are [    0 (  0 %) ] trials going through [ 15 ] guess(es).
 
 Furthermore, the mean equals to 5.6 (times).
+```
+
+Now, we genuinely crack the secret and reveal the tactic of winning this game, next, we do the real human's competitions. It is substantially different from artificial game simulation because humans have innermost activities, psycological factors, or being prone to certain patterns when encryping things, they may behave elusively to hind their actual feelings, they may read the micro perturbations of opponent's behavior, all of these will cause the game not to proceed randomly, which implies that the probability of winning the game is not subject to Gaussian distribution. This is a table illustrating the statistics of human games.
